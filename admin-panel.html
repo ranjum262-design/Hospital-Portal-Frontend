@@ -1,0 +1,81 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-dark"><i class="fas fa-user-shield me-2"></i>Admin Control Panel</h2>
+    <button class="btn btn-primary shadow-sm" (click)="openAddModal()" data-bs-toggle="modal" data-bs-target="#topicModal">
+      <i class="fas fa-plus me-2"></i>Add New Topic
+    </button>
+  </div>
+
+  <div class="card border-0 shadow-sm" *ngIf="topics.length > 0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4">Title</th>
+            <th>Category</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let topic of topics">
+            <td class="ps-4"><strong>{{ topic.title }}</strong></td>
+            <td><span class="badge bg-info-subtle text-info px-3">{{ topic.category }}</span></td>
+            <td class="text-center">
+              <button class="btn btn-sm text-primary border-0 me-2" (click)="openEditModal(topic)" data-bs-toggle="modal" data-bs-target="#topicModal">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-sm text-danger border-0" (click)="deleteTopic(topic._id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="topicModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title">{{ isEditMode ? 'Edit Topic' : 'Add New Module' }}</h5>
+        <button type="button" class="btn-close btn-close-white" id="closeModal" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form #topicForm="ngForm" (ngSubmit)="onSubmit(topicForm)">
+          <div class="mb-3">
+  <label class="form-label fw-bold">Title</label>
+  <input type="text" name="title" [(ngModel)]="selectedTopic.title" class="form-control" placeholder="Enter title">
+</div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Category</label>
+            <select name="category" [(ngModel)]="selectedTopic.category" class="form-select" required>
+              <option value="Education">Education</option>
+              <option value="Exercises">Exercises</option>
+              <option value="Nutrition">Nutrition</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+  <label class="form-label fw-bold">YouTube Video URL </label>
+  <input type="text" name="videoUrl" [(ngModel)]="selectedTopic.videoUrl" class="form-control">
+</div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Description</label>
+            <textarea name="description" [(ngModel)]="selectedTopic.description" class="form-control" rows="2" placeholder="Brief description"></textarea>
+          </div>
+
+          <div class="mb-3">
+  <label class="form-label fw-bold">Detailed Notes</label>
+  <textarea name="notes" [(ngModel)]="selectedTopic.notes" class="form-control" rows="3"></textarea>
+</div>
+
+          <button type="submit" class="btn w-100 py-2 fw-bold shadow-sm" [ngClass]="isEditMode ? 'btn-primary' : 'btn-success'">
+  {{ isEditMode ? 'Update Changes' : 'Save Topic' }}
+</button>
+     
+   
+

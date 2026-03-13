@@ -1,0 +1,19 @@
+.container {
+  max-width: 1000px;
+}
+
+.table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 15px;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+}

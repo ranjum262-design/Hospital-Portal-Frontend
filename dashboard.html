@@ -1,0 +1,41 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="sidebar-menu">
+      <button (click)="filterByCategory('All')" class="menu-item" [class.active]="selectedCategory === 'All'">
+        <i class="fas fa-th-large"></i> All Modules
+      </button>
+      <button (click)="filterByCategory('Education')" class="menu-item" [class.active]="selectedCategory === 'Education'">
+        <i class="fas fa-book-medical"></i> Education
+      </button>
+      <button (click)="filterByCategory('Exercises')" class="menu-item" [class.active]="selectedCategory === 'Exercises'">
+        <i class="fas fa-running"></i> Exercises
+      </button>
+      <button (click)="filterByCategory('Nutrition')" class="menu-item" [class.active]="selectedCategory === 'Nutrition'">
+        <i class="fas fa-apple-alt"></i> Nutrition
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      <small class="footer-label">MANAGEMENT</small>
+      <button routerLink="/admin" class="admin-btn">
+        <i class="fas fa-user-shield"></i> Admin Panel
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-layout">
+    <main class="content-body">
+      <div class="content-header">
+        <h3 class="page-title">{{ selectedCategory }} Modules</h3>
+        <span class="badge-count">{{ filteredTopics.length }} Topics</span>
+      </div>
+
+      <div class="topics-grid">
+        <div class="grid-card" *ngFor="let t of filteredTopics">
+          <app-topic-card [topic]="t"></app-topic-card>
+        </div>
+      </div>
+    
+    </main>
+  </div>
+</div>
